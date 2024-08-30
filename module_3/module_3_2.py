@@ -15,8 +15,6 @@ def valid_at(email):
     else:
         return False
 
-# print(at_test('university.help@gmail.com', 'y@y.t'))
-
 
 default_sender = 'university.help@gmail.com'
 
