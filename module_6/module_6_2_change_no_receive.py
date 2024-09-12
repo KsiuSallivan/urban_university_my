@@ -24,10 +24,6 @@ class Vehicle:
 
     def set_color(self, new_color):
 
-        # __COLOR_VARIANTS_new = []
-        # for i in range(len(self.__COLOR_VARIANTS)):
-        #     __COLOR_VARIANTS_new.append(self.__COLOR_VARIANTS[i].lower())
-
         if str(new_color).lower() in self.__COLOR_VARIANTS:
             self.__color = new_color
         else:
