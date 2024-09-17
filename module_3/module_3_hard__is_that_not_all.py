@@ -55,3 +55,15 @@ def calculate_structure_sum(data_structure):
 
 result = calculate_structure_sum(data_structure)
 print(result)
+
+# ---подсказка с вебинара
+# def calculate_structure_sum(data_structure):
+# # result = 0
+# # if если данные int
+# # elif если данные str
+# elif isinstance(data_structure, (list, tuple, set)):
+#     for el in data_structure:
+#         result +=calculate_structure_sum(el)
+# elif isinstance(data_structure, dict):
+#
+# return result
