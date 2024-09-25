@@ -39,25 +39,7 @@ class Shop:
         file.close()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-# p1 = Product('Potato', 50.5, 'Vegetables')
-# print(p1.name)
-
-
 # test
-
 s1 = Shop()
 p1 = Product('Potato', 50.5, 'Vegetables')
 p2 = Product('Spaghetti', 3.4, 'Groceries')
