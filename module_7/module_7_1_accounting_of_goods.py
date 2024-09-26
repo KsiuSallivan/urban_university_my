@@ -9,7 +9,9 @@ class Product:
 
 
 class Shop:
-    __file_name = 'products.txt'
+
+    def __init__(self, file_name='products.txt'):
+        self.__file_name = file_name
 
     def get_products(self):
         """Метод get_products(self), который считывает всю информацию из файла __file_name,
