@@ -2,9 +2,16 @@ import math
 
 
 class Figure:
-    def __init__(self, color, sides):
-        self.sides_count = 0
-        self.__sides = list(sides) # список сторон (целые числа)
+
+    sides_count = 0
+
+    def __init__(self, color, *sides):
+
+        if len(sides) != self.sides_count:
+            self.__sides = sides[0]*self.sides_count
+        else:
+            self.__sides = [i for i in sides]
+
         self.__color = list(color) # список цветов в формате RGB
         self.filled = False # закрашенный, bool
 
@@ -36,7 +43,7 @@ class Figure:
         и кол-во новых сторон совпадает с текущим, False - во всех остальных случаях."""
 
         for i in args:
-            if not (isinstance(i, int) and 0 < i):
+            if not (isinstance(i, int) and i > 0):
                 return False
 
         if len(args) != self.sides_count:
@@ -49,33 +56,23 @@ class Figure:
         return self.__sides
 
     def __len__(self):
-        """ должен возвращать периметр фигуры"""
-        len_sides = 0
-        for i in self.__sides:
-            len_sides += i
-        return len_sides
+        return sum(self.__sides)
 
     def set_sides(self, *new_sides):
         """ должен принимать новые стороны, если их количество не равно sides_count, то не изменять,
         в противном случае - менять"""
-        sides_list = []
-        if len(new_sides) == self.sides_count:
-            if self.__is_valid_sides(*new_sides):
-                self.__sides = new_sides
-        # else:
-        #     for i in range(self.sides_count+1):
-        #         sides_list.append(1)
-        #     self.__sides = sides_list
 
-        return self.__sides
+        if self.__is_valid_sides(*new_sides):
+            self.__sides = new_sides
+
 
 
 class Circle(Figure):
+
     def __init__(self, color, side):
         self.sides_count = 1
         super().__init__(color, [side])
         self.__radius = side / (2*math.pi)
-
 
     def get_square(self):
         """ возвращает площадь круга (можно рассчитать как через длину, так и через радиус)"""
@@ -83,10 +80,10 @@ class Circle(Figure):
         return square
 
 
+
 class Triangle(Figure):
-    def __init__(self, color, sides):
-        self.sides_count = 3
-        super().__init__(color, sides)
+
+    sides_count = 3
 
     def get_square(self):
         """ возвращает площадь треугольника. (можно рассчитать по формуле Герона)"""
@@ -97,10 +94,12 @@ class Triangle(Figure):
 
 
 class Cube(Figure):
+
     def __init__(self, color, side):
         self.sides_count = 12
         super().__init__(color, [side])
         self.__sides = side * 12
+
 
     def get_volume(self):
         """ возвращает объём куба."""
@@ -117,19 +116,25 @@ cube1 = Cube((222, 35, 130), 6)
 
 # Проверка на изменение цветов:
 circle1.set_color(55, 66, 77) # Изменится
+print('Цвет меняется - должно быть [55, 66, 77]')
 print(circle1.get_color())
 cube1.set_color(300, 70, 15) # Не изменится
+print('Цвет НЕ меняется - должно быть [222, 35, 130]')
 print(cube1.get_color())
 
 # Проверка на изменение сторон:
 cube1.set_sides(5, 3, 12, 4, 5) # Не изменится
+print('Стороны куба НЕ меняются - должно быть [6 6 6 6 6 6 6 6 6 6 6 6]')
 print(cube1.get_sides())
 circle1.set_sides(15) # Изменится
+print('Окружность меняется - должно быть [15]')
 print(circle1.get_sides())
 
 # Проверка периметра (круга), это и есть длина:
+print('Периметр круга,  - как в предыдущем пункт должно быть 15')
 print(len(circle1))
 
 # Проверка объёма (куба):
+print('Объем куба,  - должен быть 216')
 print(cube1.get_volume())
 
