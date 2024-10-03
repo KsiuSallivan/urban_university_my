@@ -63,19 +63,18 @@ class Figure:
         в противном случае - менять"""
 
         if self.__is_valid_sides(*new_sides):
-            self.__sides = new_sides
-
+            self.__sides = list(new_sides)
 
 
 class Circle(Figure):
 
     def __init__(self, color, side):
         self.sides_count = 1
-        super().__init__(color, [side])
-        self.__radius = side / (2*math.pi)
+        super().__init__(color, side)
+        self.__radius = side / (2 * math.pi)
 
     def get_square(self):
-        """ возвращает площадь круга (можно рассчитать как через длину, так и через радиус)"""
+        """ возвращает площадь круга (можно рассчитать как через радиус)"""
         square = math.pi * (self.__radius ** 2)
         return square
 
