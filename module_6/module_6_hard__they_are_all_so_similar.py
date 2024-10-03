@@ -37,7 +37,6 @@ class Figure:
 
         return self.__color
 
-
     def __is_valid_sides(self, *args):
         """ принимает неограниченное кол-во сторон, возвращает True если все стороны целые положительные числа
         и кол-во новых сторон совпадает с текущим, False - во всех остальных случаях."""
@@ -79,7 +78,6 @@ class Circle(Figure):
         return square
 
 
-
 class Triangle(Figure):
 
     sides_count = 3
@@ -98,7 +96,6 @@ class Cube(Figure):
         self.sides_count = 12
         super().__init__(color, [side])
         self.__sides = side * 12
-
 
     def get_volume(self):
         """ возвращает объём куба."""
@@ -123,7 +120,7 @@ print(cube1.get_color())
 
 # Проверка на изменение сторон:
 cube1.set_sides(5, 3, 12, 4, 5) # Не изменится
-print('Стороны куба НЕ меняются - должно быть [6 6 6 6 6 6 6 6 6 6 6 6]')
+print('Стороны куба НЕ меняются - должно быть [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]')
 print(cube1.get_sides())
 circle1.set_sides(15) # Изменится
 print('Окружность меняется - должно быть [15]')
