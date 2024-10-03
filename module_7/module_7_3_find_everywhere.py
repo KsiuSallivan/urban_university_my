@@ -12,6 +12,7 @@ class WordsFinder:
 
         for fl in self.file_names:
             with open(fl, encoding='utf-8') as file:
+                words = []
                 for line in file:
                     line = line.lower()
                     line1 = line.replace(',', '')
@@ -24,7 +25,10 @@ class WordsFinder:
                     line8 = line7.replace(' - ', '')
 
                     string_clear = line8.split(' ')
-                all_words[fl] = string_clear
+
+                    words.extend(string_clear)
+
+                all_words[fl] = words
 
         return all_words
 
