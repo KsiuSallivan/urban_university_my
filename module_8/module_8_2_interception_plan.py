@@ -2,9 +2,9 @@ def personal_sum(numbers):
     result = 0
     incorrect_data = 0
     for num in numbers:
-        if isinstance(num, int):
+        try:
             result = result + num
-        else:
+        except TypeError:
             incorrect_data = incorrect_data + 1
     return result, incorrect_data
 
