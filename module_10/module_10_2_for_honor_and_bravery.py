@@ -20,6 +20,7 @@ class Knight(Thread):
         print(f"{self.name} одержал победу спустя {days-1} дней(дня)!")
 
 
+# test
 # Создание объектов класса
 first_knight = Knight('Sir Lancelot', 10)
 second_knight = Knight("Sir Galahad", 20)
