@@ -1,5 +1,5 @@
 import unittest
-
+from module_12_3_frozen_freezing_cases import skip_if_frozen
 
 # класс для тестирования
 class Runner:
@@ -19,18 +19,23 @@ class Runner:
 
 # unit test
 class RunnerTest(unittest.TestCase):
+    is_frozen = False
+
+    @skip_if_frozen
     def test_walk(self):
         runner = Runner('Sam')
         for _ in range(10):
             runner.walk()
         self.assertEqual(runner.distance, 50)
 
+    @skip_if_frozen
     def test_run(self):
         runner = Runner('Sew')
         for _ in range(10):
             runner.run()
         self.assertEqual(runner.distance, 100)
 
+    @skip_if_frozen
     def test_challenge(self):
         runner1 = Runner("Ed")
         runner2 = Runner("Kate")

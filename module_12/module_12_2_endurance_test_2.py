@@ -1,4 +1,5 @@
 import unittest
+from module_12_3_frozen_freezing_cases import skip_if_frozen
 
 
 # классы для тестирования
@@ -46,6 +47,7 @@ class Tournament:
 # unit test
 class TournamentTest(unittest.TestCase):
     all_results = []
+    is_frozen = True
 
     @classmethod
     def setUpClass(cls):
@@ -63,18 +65,21 @@ class TournamentTest(unittest.TestCase):
             formatted_result = {place: str(runner) for place, runner in result.items()}
             print(formatted_result)
 
+    @skip_if_frozen
     def test_usain_and_nik(self):
         tournament = Tournament(90, self.runner1, self.runner3)
         result = tournament.start()
         self.all_results.append(result)
         self.assertEqual(list(result.values())[-1], self.runner3)
 
+    @skip_if_frozen
     def test_andrey_and_nik(self):
         tournament = Tournament(90, self.runner2, self.runner3)
         result = tournament.start()
         self.all_results.append(result)
         self.assertEqual(list(result.values())[-1], self.runner3)
 
+    @skip_if_frozen
     def test_usain_andrey_and_nik(self):
         tournament = Tournament(90, self.runner1, self.runner2, self.runner3)  # Порядок участников
         result = tournament.start()
