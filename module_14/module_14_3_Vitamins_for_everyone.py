@@ -4,7 +4,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.dispatcher import FSMContext
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
-api = "7733_my_token"
+api = "7733908834:AAG3JEchnGdDu8UkAIiugC4vjCxZ8URS_t4"
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
@@ -20,14 +20,17 @@ class UserState(StatesGroup):
 keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
 keyboard.add(KeyboardButton('Рассчитать'), KeyboardButton('Информация'), KeyboardButton('Купить'))
 
-# Inline-клавиатура
-inline_keyboard = InlineKeyboardMarkup()
-inline_keyboard.add(InlineKeyboardButton('Рассчитать норму калорий', callback_data='calories'))
-inline_keyboard.add(InlineKeyboardButton('Формулы расчёта', callback_data='formulas'))
-inline_keyboard.add(InlineKeyboardButton('Product1', callback_data='product_buying'),
-                    InlineKeyboardButton('Product2', callback_data='product_buying'))
-inline_keyboard.add(InlineKeyboardButton('Product3', callback_data='product_buying'),
-                    InlineKeyboardButton('Product4', callback_data='product_buying'))
+# Inline-клавиатура для расчёта
+inline_keyboard_calculation = InlineKeyboardMarkup()
+inline_keyboard_calculation.add(InlineKeyboardButton('Рассчитать норму калорий', callback_data='calories'))
+inline_keyboard_calculation.add(InlineKeyboardButton('Формулы расчёта', callback_data='formulas'))
+
+# Inline-клавиатура для продуктов
+inline_keyboard_products = InlineKeyboardMarkup()
+inline_keyboard_products.add(InlineKeyboardButton('Product1', callback_data='product_buying'),
+                             InlineKeyboardButton('Product2', callback_data='product_buying'))
+inline_keyboard_products.add(InlineKeyboardButton('Product3', callback_data='product_buying'),
+                             InlineKeyboardButton('Product4', callback_data='product_buying'))
 
 
 # Функция для старта
@@ -39,7 +42,7 @@ async def start(message: types.Message):
 # Функция для вывода Inline-меню
 @dp.message_handler(text='Рассчитать')
 async def main_menu(message: types.Message):
-    await message.answer('Выберите опцию:', reply_markup=inline_keyboard)
+    await message.answer('Выберите опцию:', reply_markup=inline_keyboard_calculation)
 
 
 # Функция для вывода формулы
@@ -93,7 +96,7 @@ async def get_buying_list(message: types.Message):
         # Отправка картинки к каждому продукту
         with open(f'product{i}.jpg', 'rb') as photo:
             await message.answer_photo(photo)
-    await message.answer('Выберите продукт для покупки:', reply_markup=inline_keyboard)
+    await message.answer('Выберите продукт для покупки:', reply_markup=inline_keyboard_products)
 
 
 # Callback handler, который реагирует на "product_buying" и вызывает функцию send_confirm_message
