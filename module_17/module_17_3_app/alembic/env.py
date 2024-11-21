@@ -5,9 +5,9 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from module_17.module_17_3_app.backend.db import Base
-from module_17.module_17_3_app.models.user import User
-from module_17.module_17_3_app.models.task import Task
+from backend.db import Base
+from models.user import User
+from models.task import Task
 
 import sys
 import os

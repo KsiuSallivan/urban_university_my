@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
-from module_17.module_17_3_app.backend.db import Base
+from backend.db import Base
 
 
 class Task(Base):
