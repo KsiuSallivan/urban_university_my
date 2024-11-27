@@ -7,7 +7,7 @@
       <excludeFolder url="file://$MODULE_DIR$/venv_ksiu" />
       <excludeFolder url="file://$MODULE_DIR$/venv_ksiu_13" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.9" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.9 (urban_university_my)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

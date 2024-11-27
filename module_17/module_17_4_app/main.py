@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from routers.task import router as task_router
 from routers.user import router as user_router
 from sqlalchemy import create_engine
-from module_17.module_17_3_app.backend.db import Base
+from backend.db import Base
 
 app = FastAPI()
 
