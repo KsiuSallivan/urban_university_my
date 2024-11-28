@@ -36,7 +36,7 @@ async def create_user(user: CreateUser, db: Annotated[Session, Depends(get_db)])
         age=user.age,
         slug=slug
     )
-    # Преобразуем объект в словарь перед использованием `insert`
+    # РџСЂРµРѕР±СЂР°Р·СѓРµРј РѕР±СЉРµРєС‚ РІ СЃР»РѕРІР°СЂСЊ РїРµСЂРµРґ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј `insert`
     db.execute(
         insert(User).values(
             username=new_user.username,
@@ -50,17 +50,16 @@ async def create_user(user: CreateUser, db: Annotated[Session, Depends(get_db)])
     return {"status_code": status.HTTP_201_CREATED, "transaction": "Successful"}
 
 
-@router.put("/update")
+@router.put("/update/{id}")
 async def update_user(user_id: int, user: UpdateUser, db: Annotated[Session, Depends(get_db)]):
-    existing_user = db.scalar(select(User).where(User.id == user_id))
+    existing_user = db.scalars(select(User).where(User.id == user_id)).first()
     if existing_user:
-        # Обновляем поля существующего пользователя
+        # РћР±РЅРѕРІР»СЏРµРј РїРѕР»СЏ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
         db.execute(
             update(User).where(User.id == user_id).values(
                 firstname=user.firstname,
                 lastname=user.lastname,
                 age=user.age,
-                slug=user.slug
             )
         )
         db.commit()
@@ -69,7 +68,7 @@ async def update_user(user_id: int, user: UpdateUser, db: Annotated[Session, Dep
         raise HTTPException(status_code=404, detail="User was not found")
 
 
-@router.delete("/delete")
+@router.delete("/delete/{id}")
 async def delete_user(user_id: int, db: Annotated[Session, Depends(get_db)]):
     existing_user = db.scalar(select(User).where(User.id == user_id))
     if existing_user:
