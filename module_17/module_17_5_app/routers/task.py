@@ -46,7 +46,7 @@ async def create_task(task: CreateTask, user_id: int, db: Annotated[Session, Dep
     return {"status_code": status.HTTP_201_CREATED, "transaction": "Successful"}
 
 
-@router.put("/update/{id}")
+@router.put("/update/{task_id}")
 async def update_task(task_id: int, task: UpdateTask, db: Annotated[Session, Depends(get_db)]):
     existing_task = db.scalars(select(Task).where(Task.id == task_id)).first()
     if existing_task:
@@ -63,7 +63,7 @@ async def update_task(task_id: int, task: UpdateTask, db: Annotated[Session, Dep
         raise HTTPException(status_code=404, detail="Task was not found")
 
 
-@router.delete("/delete/{id}")
+@router.delete("/delete/{task_id}")
 async def delete_task(task_id: int, db: Annotated[Session, Depends(get_db)]):
     existing_task = db.scalar(select(Task).where(Task.id == task_id))
     if existing_task:

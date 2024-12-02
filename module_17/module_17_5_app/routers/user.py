@@ -48,7 +48,7 @@ async def create_user(user: CreateUser, db: Annotated[Session, Depends(get_db)])
     return {"status_code": status.HTTP_201_CREATED, "transaction": "Successful"}
 
 
-@router.put("/update/{id}")
+@router.put("/update/{user_id}")
 async def update_user(user_id: int, user: UpdateUser, db: Annotated[Session, Depends(get_db)]):
     existing_user = db.scalars(select(User).where(User.id == user_id)).first()
     if existing_user:
@@ -66,7 +66,7 @@ async def update_user(user_id: int, user: UpdateUser, db: Annotated[Session, Dep
         raise HTTPException(status_code=404, detail="User was not found")
 
 
-@router.delete("/delete/{id}")
+@router.delete("/delete/{user_id}")
 async def delete_user(user_id: int, db: Annotated[Session, Depends(get_db)]):
     existing_user = db.scalar(select(User).where(User.id == user_id))
     if existing_user:
